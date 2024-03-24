@@ -7,7 +7,7 @@ const Header = () => {
                 <div class="row">
                     <div class="col-md-3 col-sm-4 col-xs-12">
                         <a href="#" class="logo">
-                            <img alt="Logo" src="	http://127.0.0.1:5500/www.cizthemes.com/template/teznews/images/logo.png" />
+                            <img alt="Logo" src="http://127.0.0.1:5500/www.cizthemes.com/template/teznews/images/logo.png" />
                         </a>
                     </div>
                     <div class="col-md-6 col-md-offset-3 col-sm-8  text-right col-xs-12 hidden-xs">
