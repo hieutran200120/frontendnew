@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { postDetailLaw } from '../../services/lawService';
 import { useParams } from 'react-router-dom';
 
-const LawDetailPage = ({ dataDetail }) => {
-    console.log(dataDetail)
+const SocialPoliticsDetail = ({ dataSocialPolitics }) => {
+    console.log(dataSocialPolitics)
     return (
         <div>
-            {dataDetail && dataDetail.map((item, index) => (
+            {dataSocialPolitics && dataSocialPolitics.map((item, index) => (
 
                 <div key={index}>
                     <h5 style={{ fontWeight: 700 }}>{item.title}</h5>
@@ -23,4 +23,4 @@ const LawDetailPage = ({ dataDetail }) => {
     );
 }
 
-export default LawDetailPage;
+export default SocialPoliticsDetail;

@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { fetchAllLaw } from '../../services/lawService';
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom";
 import { Avatar, List, Space } from 'antd';
-import { postDetailLaw } from '../../services/lawService';
+import { fetchAllSocialPolitics } from '../../services/socialPoliticsService';
+import { postDetailSocialPolitics } from '../../services/socialPoliticsService';
 const IconText = ({ icon, text }) => (
     <Space>
         {React.createElement(icon)}
         {text}
     </Space>
 );
-const LawPage = ({ setDataDetail }) => {
+const SocialPoliticsPage = ({ setDataSocialPolitics }) => {
     const [data, setData] = useState([]);
     const navigate = useNavigate()
     const handleClick = async (title) => {
-        const res = await postDetailLaw({ title: title }); // Gửi title như một object
-        setDataDetail(res.data);
+        const res = await postDetailSocialPolitics({ title: title }); // Gửi title như một object
+        setDataSocialPolitics(res.data);
         console.log(title)
         console.log("detail", res.data)
-        navigate(`get_new/`)
+        navigate(`/ctxh/get_new`)
     }
-    const getLaw = async () => {
+    const getSocialPolitics = async () => {
         try {
-            let res = await fetchAllLaw();
+            let res = await fetchAllSocialPolitics();
             setData(res.data);
             console.log(res.data);
         } catch (error) {
@@ -30,7 +30,7 @@ const LawPage = ({ setDataDetail }) => {
         }
     }
     useEffect(() => {
-        getLaw();
+        getSocialPolitics();
     }, [])
 
     return (
@@ -66,4 +66,4 @@ const LawPage = ({ setDataDetail }) => {
         />
     )
 }
-export default LawPage
+export default SocialPoliticsPage

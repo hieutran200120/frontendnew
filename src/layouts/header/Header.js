@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { NavLink, useLocation } from "react-router-dom";
 const Header = () => {
     return (
         <>
@@ -21,10 +21,14 @@ const Header = () => {
                 </div>
                 <ul class="hidden-sm hidden-xs">
                     <li>
-                        <a href="index.html">Home </a>
+                        <NavLink to="/" style={{ color: "white" }}>
+                            Home
+                        </NavLink>
                     </li>
                     <li>
-                        <a href="business.html">Chính trị - xã hội</a>
+                        <NavLink to="/ctxh" style={{ color: "white" }}>
+                            Chính trị - xã hội
+                        </NavLink>
                     </li>
                     <li class="mega">
                         <a href="reviews.html">Gia đình<span></span></a>
