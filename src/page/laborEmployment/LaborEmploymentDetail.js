@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDataContext } from '../../utils/getData';
-const LawDetailPage = () => {
-    const { dataDetail } = useDataContext();
+const LaborEmploymentDetail = () => {
+    const { dataLaborEmployment } = useDataContext();
     return (
         <div class="utf_block_wrapper about-block-area">
             <div class="container">
@@ -10,7 +10,7 @@ const LawDetailPage = () => {
                         <div class="single-post">
                             <div class="utf_post_content-area">
                                 <div class="entry-content">
-                                    {dataDetail && dataDetail.map((item, index) => (
+                                    {dataLaborEmployment && dataLaborEmployment.map((item, index) => (
 
                                         <div key={index}>
                                             <h5 style={{ fontWeight: 700 }}>{item.title}</h5>
@@ -30,8 +30,7 @@ const LawDetailPage = () => {
                 </div>
             </div>
         </div>
-
     );
 }
 
-export default LawDetailPage;
+export default LaborEmploymentDetail;
