@@ -37,7 +37,7 @@ const Footer = () => {
                             </ul>
                         </div>
 
-                        <div class="col-lg-4 col-sm-12 col-xs-12 footer-widget">
+                        {/* <div class="col-lg-4 col-sm-12 col-xs-12 footer-widget">
                             <h3 class="widget-title" style={{ background: "black" }}>Popular Post</h3>
                             <div class="utf_list_post_block">
                                 <ul class="utf_list_post">
@@ -72,7 +72,7 @@ const Footer = () => {
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>

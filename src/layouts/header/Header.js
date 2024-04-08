@@ -1,8 +1,43 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { NavLink, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { message } from 'antd';
 import "../../css/responsive.scss"
 import logo from "../../Images/logo.jpg"
+import { postSearch } from '../../services/searchService';
+import { useDataContext } from '../../utils/getData';
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [title, setTitle] = useState('');
+    const searchBlockRef = useRef(null);
+    const { setSearch } = useDataContext();
+    const navigate = useNavigate()
+    const toggleDisplay = () => {
+        setIsSearchOpen(!isSearchOpen);
+    };
+    const changeTitle = (e) => {
+        setTitle(e.target.value);
+    };
+    //tìm kiếm 
+    const handleClickSearch = async (e) => {
+        e.preventDefault();
+        try {
+            console.log("values", title);
+            const res = await postSearch({ title: title });
+            if (res) {
+                setSearch(res.data);
+                navigate(`/search`);
+            } else {
+                message.error(res.message);
+            }
+        } catch (err) {
+            console.log(err);
+            message.error("Đăng nhập thất bại");
+        }
+    };
+
     return (
         <>
             <header id="header" class="header">
@@ -40,12 +75,23 @@ const Header = () => {
                                         </li>
                                         <li > <NavLink to="/giaitri">Giải trí <i class="fa fa-angle-down"></i></NavLink>
                                         </li>
-                                        <li > <a href="#" data-toggle="dropdown">Pháp luật <i class="fa fa-angle-down"></i></a>
+                                        <li > <NavLink to="/phapluat">Pháp luật <i class="fa fa-angle-down"></i></NavLink>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </nav>
+                        <div class="utf_nav_search" onClick={toggleDisplay}> <FontAwesomeIcon icon={faSearch} /> </div>
+                        <div ref={searchBlockRef} className="utf_search_block" style={{ display: isSearchOpen ? 'block' : 'none' }} >
+                            <form action="" onSubmit={handleClickSearch}>
+                                <input
+                                    type="text" class="form-control"
+                                    placeholder="Type what you want and enter"
+                                    value={title}
+                                    onChange={changeTitle} />
+                            </form>
+                            <span class="utf_search_close" onClick={toggleDisplay}>&times;</span>
+                        </div>
                     </div>
                 </div>
             </div>

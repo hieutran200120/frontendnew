@@ -13,7 +13,10 @@ import { fetchAllLaborEmployment } from '../services/LaborEmploymentService';
 import { postDetailLaborEmployment } from '../services/LaborEmploymentService';
 import { fetchAllEntertainment } from '../services/entertainmentService';
 import { postDetailEntertainment } from '../services/entertainmentService';
+import { postSearchDetail } from '../services/searchService';
+import { postSearch } from '../services/searchService';
 import { useNavigate } from "react-router-dom";
+import { message } from 'antd';
 const DataContext = createContext();
 export const useDataContext = () => useContext(DataContext);
 export const DataProvider = ({ children }) => {
@@ -24,6 +27,8 @@ export const DataProvider = ({ children }) => {
     const [babyCare, setBabyCare] = useState([])
     const [laborEmployment, setLaborEmployment] = useState([])
     const [entertainment, setEntertainment] = useState([])
+    const [search, setSearch] = useState([])
+    const [dataSearch, setDataSearch] = useState(null)
     const [dataDetail, setDataDetail] = useState(null);
     const [dataSocialPolitics, setDataSocialPolitics] = useState(null);
     const [dataHealthCare, setDataHealthCare] = useState(null);
@@ -32,12 +37,12 @@ export const DataProvider = ({ children }) => {
     const [dataFamily, setDataFamily] = useState(null);
     const [dataEntertainment, setDataEntertainment] = useState(null)
     const navigate = useNavigate()
+
     //lấy dữ liệu pháp luật
     const getLaw = async () => {
         try {
             let res = await fetchAllLaw();
             setData(res.data);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching law data:", error);
         }
@@ -46,8 +51,6 @@ export const DataProvider = ({ children }) => {
     const handleClick = async (title) => {
         const res = await postDetailLaw({ title: title }); // Gửi title như một object
         setDataDetail(res.data);
-        console.log(title)
-        console.log("detail", res.data)
         navigate(`get_new/`)
     }
     //lấy dữ liệu chính trị xã hội
@@ -55,7 +58,6 @@ export const DataProvider = ({ children }) => {
         try {
             let res = await fetchAllSocialPolitics();
             setSocialPolitics(res.data);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching law data:", error);
         }
@@ -64,8 +66,6 @@ export const DataProvider = ({ children }) => {
     const handleClickSocialPolitics = async (title) => {
         const res = await postDetailSocialPolitics({ title: title }); // Gửi title như một object
         setDataSocialPolitics(res.data);
-        console.log(title)
-        console.log("detail", res.data)
         navigate(`/ctxh/get_new`)
     }
     //lấy dữ liệu gia đình
@@ -73,7 +73,6 @@ export const DataProvider = ({ children }) => {
         try {
             let res = await fetchAllFamily();
             setFamily(res.data);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching law data:", error);
         }
@@ -82,8 +81,6 @@ export const DataProvider = ({ children }) => {
     const handleClickFamily = async (title) => {
         const res = await postDetailFamily({ title: title }); // Gửi title như một object
         setDataFamily(res.data);
-        console.log(title)
-        console.log("detail", res.data)
         navigate(`/giadinh/get_new`)
     }
     //lấy dữ liệu chăm sóc sức khỏe
@@ -91,7 +88,6 @@ export const DataProvider = ({ children }) => {
         try {
             let res = await fetchAllHealthCare();
             setHealthCare(res.data);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching law data:", error);
         }
@@ -100,8 +96,6 @@ export const DataProvider = ({ children }) => {
     const handleClickHealthCare = async (title) => {
         const res = await postDetailHealthCare({ title: title }); // Gửi title như một object
         setDataHealthCare(res.data);
-        console.log(title)
-        console.log("detail", res.data)
         navigate(`/cssk/get_new`)
     }
     //lấy dữ liệu chăm sóc trẻ
@@ -109,7 +103,6 @@ export const DataProvider = ({ children }) => {
         try {
             let res = await fetchAllBabyCare();
             setBabyCare(res.data);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching law data:", error);
         }
@@ -119,7 +112,6 @@ export const DataProvider = ({ children }) => {
         const res = await postDetailBabyCare({ title: title }); // Gửi title như một object
         setDataBabyCare(res.data);
         console.log(title)
-        console.log("detail", res.data)
         navigate(`/chamsoctre/get_new`)
     }
     //lấy dữ liệu lao dộng việc làm
@@ -127,7 +119,6 @@ export const DataProvider = ({ children }) => {
         try {
             let res = await fetchAllLaborEmployment();
             setLaborEmployment(res.data);
-            console.log(res.data);
         } catch (error) {
             console.error("Error fetching law data:", error);
         }
@@ -136,8 +127,6 @@ export const DataProvider = ({ children }) => {
     const handleClickLaborEmployment = async (title) => {
         const res = await postDetailLaborEmployment({ title: title }); // Gửi title như một object
         setDataLaborEmployment(res.data);
-        console.log(title)
-        console.log("detail", res.data)
         navigate(`/ldvl/get_new`)
     }
     //lấy dữ liệu giải trí
@@ -145,7 +134,6 @@ export const DataProvider = ({ children }) => {
         try {
             let res = await fetchAllEntertainment();
             setEntertainment(res.data);
-            console.log("data", res.data);
         } catch (error) {
             console.error("Error fetching law data:", error);
         }
@@ -154,9 +142,31 @@ export const DataProvider = ({ children }) => {
     const handleClickEntertainment = async (title) => {
         const res = await postDetailEntertainment({ title: title }); // Gửi title như một object
         setDataEntertainment(res.data);
-        console.log(title)
-        console.log("detail", res.data)
         navigate(`/giaitri/get_new`)
+    }
+    //tìm kiếm 
+    const handleClickSearch = async (title) => {
+        try {
+            console.log("values", title);
+            const res = await postSearch({ title: title });
+            if (res) {
+                setSearch(res);
+                message.success("Thành công");
+                navigate(`/search`);
+            } else {
+                message.error(res.message);
+            }
+        } catch (err) {
+            console.log(err);
+            message.error("Đăng nhập thất bại");
+        }
+    };
+    //xem chi tiết khi đã tìm kiếm
+    const handleClickSearchDetail = async (title) => {
+        const res = await postSearchDetail({ title: title });
+        setDataSearch(res.data);
+        console.log("data", res.data)
+        navigate(`/search/get_new`)
     }
     useEffect(() => {
         getLaw();
@@ -173,14 +183,16 @@ export const DataProvider = ({ children }) => {
             value={{
                 data, socialPolitics, family, healthCare, babyCare,
                 laborEmployment, dataDetail, dataSocialPolitics, dataHealthCare,
-                dataBabyCare, dataLaborEmployment, dataFamily, entertainment, dataEntertainment,
+                dataBabyCare, dataLaborEmployment, dataFamily, entertainment, dataEntertainment, search, dataSearch, setSearch,
                 handleClick,
                 handleClickSocialPolitics,
                 handleClickFamily,
                 handleClickHealthCare,
                 handleClickBabyCare,
                 handleClickLaborEmployment,
-                handleClickEntertainment
+                handleClickEntertainment,
+                handleClickSearch,
+                handleClickSearchDetail
             }}>
             {children}
         </DataContext.Provider>

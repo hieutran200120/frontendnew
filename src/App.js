@@ -22,6 +22,9 @@ import FamilyPage from './page/family/FamilyPage';
 import FamilyDetail from './page/family/FamilyDetail';
 import EntertainmentPage from './page/entertainment/EntertainmentPage';
 import EntertainmentDetail from './page/entertainment/EntertainmentDetail';
+import SearchPage from './page/search/SearchPage';
+import SearchDetailPage from './page/search/SearchDetailPage';
+import IndexPage from './page/law/IndexPage';
 import { DataProvider } from './utils/getData';
 function App() {
   return (
@@ -44,6 +47,9 @@ function App() {
               <Route path='/giadinh/get_new' element={<FamilyDetail />} />
               <Route path='/giaitri' element={<EntertainmentPage />} />
               <Route path='/giaitri/get_new' element={<EntertainmentDetail />} />
+              <Route path='/search' element={<SearchPage />} />
+              <Route path='/search/get_new' element={<SearchDetailPage />} />
+              <Route path='/phapluat' element={<IndexPage />} />
             </Route>
           </Routes>
         </DataProvider>

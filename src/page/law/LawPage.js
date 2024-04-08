@@ -252,7 +252,7 @@ const LawPage = () => {
                         <div class="col-lg-4 col-md-12">
                             <div class="sidebar utf_sidebar_right">
                                 <div class="widget">
-                                    <h3 class="utf_block_title"><span>Follow Us</span></h3>
+                                    <h3 class="utf_block_title"><span>Theo dõi</span></h3>
                                     <ul class="social-icon">
                                         <li>
                                             <a href="#" target="_blank" >
@@ -268,7 +268,7 @@ const LawPage = () => {
                                 </div>
 
                                 <div class="widget color-default">
-                                    <h3 class="utf_block_title"><span>Popular News</span></h3>
+                                    <h3 class="utf_block_title"><span>Tin tức mới</span></h3>
                                     <div class="utf_post_overaly_style clearfix">
                                         {socialPolitics.slice(6, 7).map((item, index) => (
                                             <div key={index} class="utf_post_thumb">
@@ -301,7 +301,7 @@ const LawPage = () => {
                                 </div>
 
                                 <div class="widget color-default m-bottom-0">
-                                    <h3 class="utf_block_title"><span>Trending News</span></h3>
+                                    <h3 class="utf_block_title"><span>Xu hướng</span></h3>
                                     <div id="utf_post_slide" class="owl-carousel owl-theme utf_post_slide">
                                         <div class="item">
                                             <div class="utf_post_overaly_style text-center clearfix">
