@@ -25,6 +25,7 @@ import EntertainmentDetail from './page/entertainment/EntertainmentDetail';
 import SearchPage from './page/search/SearchPage';
 import SearchDetailPage from './page/search/SearchDetailPage';
 import IndexPage from './page/law/IndexPage';
+import ChatPage from './page/chat/ChatPage';
 import { DataProvider } from './utils/getData';
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
               <Route path='/search' element={<SearchPage />} />
               <Route path='/search/get_new' element={<SearchDetailPage />} />
               <Route path='/phapluat' element={<IndexPage />} />
+              <Route path='/chat' element={<ChatPage />} />
             </Route>
           </Routes>
         </DataProvider>
